@@ -5,14 +5,13 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
 
-//TODO: Change class name to LogHandler and tweak methods.
 //TODO: Log messages to file instead of console.
 
 namespace DiscordTestBot
 {
-    public class Logger
+    public class LogHandler
     {
-        public async Task LogHandler(object obj)
+        public async Task Handle(object obj)
         {
             if(obj is SocketMessage)
                 await LogMessage((SocketMessage)obj);

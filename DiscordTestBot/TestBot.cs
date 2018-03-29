@@ -5,30 +5,32 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Create and use only single instance of MessageHandler, Logger and CommandHandler.
-//TODO: Settings file and loading settings.
-
 namespace DiscordTestBot
 {
     class TestBot
     {
 
-        MessageHandler mh;
-        Logger logger;
+        //TODO: Create and use only single instance of MessageHandler, Logger and CommandHandler.
+        MessageHandler MH;
+        LogHandler logger;
+        Settings settings;
 
         public async Task MainAsync()
-        {
+        {   
+            //TODO: Settings file and loading settings.
+            settings = new Settings();
+            await settings.LoadSettings();
             var client = InitClient();
-            logger = new Logger();
+            logger = new LogHandler();
             await Connect(client);
-            mh = new MessageHandler();
-            await mh.HandleMessages(client);
+            MH = new MessageHandler();
+            await MH.Handler(client);
             await Task.Delay(-1);
         }
 
         private async Task Log(LogMessage message)
         {
-            await logger.LogHandler(message);
+            await logger.Handle(message);
             await Task.CompletedTask;
         }
 
