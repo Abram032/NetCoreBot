@@ -16,11 +16,9 @@ namespace DiscordTestBot
         private async Task MessageRecieved(SocketMessage message)
         {
             await logger.Handle(message);
-            if(message.Content.StartsWith('!') && message.Content.Length >= 2)
+            if(message.Content.StartsWith("!t") && message.Content.Length >= 2)
             {
-                string _message = message.Content.Substring(0,2);
-                if (_message == "!t")
-                   Console.WriteLine("Command recieved!");
+                Console.WriteLine("Command recieved!");
             }
             await Task.CompletedTask;
         }

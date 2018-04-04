@@ -8,5 +8,6 @@ namespace DiscordTestBot
 {
     public class CommandHandler
     {
+
     }
 }
