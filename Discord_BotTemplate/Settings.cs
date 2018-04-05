@@ -19,6 +19,7 @@ namespace DiscordTestBot
             filePath = Environment.CurrentDirectory + @"/Settings/settings.settings";
             dict = new Dictionary<string, string>();
             DefaultKeys();
+            LoadSettings().Wait();
         }
 
         public async Task LoadSettings()

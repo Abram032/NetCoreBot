@@ -11,7 +11,7 @@ namespace DiscordTestBot
     {
         //TODO: Should I create and use only single instance of MessageHandler, Logger and CommandHandler?
         //TODO: Make constructors for each class in the project.
-        MessageHandler MH;
+        MessageHandler msgHandler;
         LogHandler logger;
         Settings settings;
         Converter converter;
@@ -22,12 +22,12 @@ namespace DiscordTestBot
             EM = new ExceptionManager();
             converter = new Converter();
             settings = new Settings();
-            await settings.LoadSettings();
-            var client = InitClient();
             logger = new LogHandler();
+            msgHandler = new MessageHandler();
+            //await settings.LoadSettings();
+            var client = InitClient();
             await Connect(client);
-            MH = new MessageHandler();
-            await MH.Handler(client);
+            await msgHandler.Handler(client);
             await Task.Delay(-1);
         }
 
