@@ -11,21 +11,24 @@ namespace DiscordTestBot
 {
     public class MessageHandler
     {
-        Logger logger = new Logger();
+        LogHandler logger;
+
+        public MessageHandler()
+        {
+            logger = new LogHandler();
+        }
 
         private async Task MessageRecieved(SocketMessage message)
         {
-            await logger.LogHandler(message);
-            if(message.Content.StartsWith('!') && message.Content.Length >= 2)
+            await logger.Handle(message);
+            if(message.Content.StartsWith("!t") && message.Content.Length >= 2)
             {
-                string _message = message.Content.Substring(0,2);
-                if (_message == "!t")
-                   Console.WriteLine("Command recieved!");
+                Console.WriteLine("Command recieved!");
             }
             await Task.CompletedTask;
         }
 
-        public async Task HandleMessages(DiscordSocketClient client)
+        public async Task Handler(DiscordSocketClient client)
         {
             client.MessageReceived += MessageRecieved;
             await Task.CompletedTask;
