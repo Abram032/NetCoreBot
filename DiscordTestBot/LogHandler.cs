@@ -10,17 +10,24 @@ namespace DiscordTestBot
 {
     public class LogHandler
     {
-        private string enviroPath = Environment.CurrentDirectory;
-        private string msgFilePath = Environment.CurrentDirectory + @"/Logs/Messages/" + DateTime.Today.ToShortDateString() + @".log";
-        private string logFilePath = Environment.CurrentDirectory + @"/Logs/Bot/" + DateTime.Today.ToShortDateString() + @".log";
+        private string enviroPath;
+        private string msgFilePath;
+        private string logFilePath;
+        
+        public LogHandler()
+        {
+            enviroPath = Environment.CurrentDirectory;
+            msgFilePath = Environment.CurrentDirectory + @"/Logs/Messages/" + DateTime.Today.ToShortDateString() + @".log";
+            logFilePath = Environment.CurrentDirectory + @"/Logs/Bot/" + DateTime.Today.ToShortDateString() + @".log";
+        }
 
-        public async Task Handle(object obj)
+        public async Task Handle(object obj, bool SaveLogs = true, bool SaveMessages = true)
         {
             if(!File.Exists(msgFilePath) || !File.Exists(logFilePath))
                 CreateDirectories();
-            if (obj is SocketMessage)
+            if (obj is SocketMessage && SaveMessages)
                 await LogMessage((SocketMessage)obj);
-            if (obj is LogMessage)
+            if (obj is LogMessage && SaveLogs)
                 await LogMessage((LogMessage)obj);
             await Task.CompletedTask;
         }

@@ -11,7 +11,12 @@ namespace DiscordTestBot
 {
     public class MessageHandler
     {
-        LogHandler logger = new LogHandler();
+        LogHandler logger;
+
+        public MessageHandler()
+        {
+            logger = new LogHandler();
+        }
 
         private async Task MessageRecieved(SocketMessage message)
         {
