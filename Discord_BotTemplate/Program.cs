@@ -2,7 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-//TODO: Add the package source to a NuGet.Config file.
+//TODO: Make CLI and Bot use ThreadPool or Tasks.
+//TODO: Should I use Interfaces?
+//TODO: Clean up code.
+//TODO: Make more unit tests.
 
 namespace Discord_BotTemplate
 {

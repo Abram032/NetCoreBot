@@ -32,7 +32,6 @@ namespace Discord_BotTemplate
             DateTime dateTime = DateTime.Now;
             string _message = dateTime.ToLongTimeString();
             _message += " { " + message.Channel + " } ( " + message.Author + " ) : " + message.Content;
-            //Console.WriteLine(_message);
             using (StreamWriter sw = new StreamWriter(msgFilePath, true))
                 await sw.WriteLineAsync(_message);
             await Task.CompletedTask;
