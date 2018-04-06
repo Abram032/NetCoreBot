@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 //TODO: Add comments to the settings file for easier use.
 //TODO: Make StreamReader skip comments "#" in settings file.
 //TODO: Add more settings for the bot.
+//TODO: Change settigns.settigns into settings.config
+//TODO: Change enviroPath into directoryPath and update CreateSettings method.
 
 namespace Discord_BotTemplate
 {

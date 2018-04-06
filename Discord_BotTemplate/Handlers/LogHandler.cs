@@ -6,6 +6,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
+//TODO: Split CreateDirectories into two methods and create folders after settings are checked not before.
+
 namespace Discord_BotTemplate
 {
     public class LogHandler
