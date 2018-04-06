@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     public class Settings
     {
-        //TODO: Figrure out how to store settings and information secure
         private string enviroPath;
         private string filePath;
-        public Dictionary<string, string> dict;
+        private Dictionary<string, string> dict;
 
         public Settings()
         {
@@ -29,6 +28,11 @@ namespace DiscordTestBot
             else
                 await CreateSettings();
             await Task.CompletedTask;
+        }
+
+        public string GetValue(string key)
+        {
+            return dict[key];
         }
         
         private async Task CreateSettings()

@@ -6,7 +6,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     public class LogHandler
     {

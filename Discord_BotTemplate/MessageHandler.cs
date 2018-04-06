@@ -7,7 +7,7 @@ using Discord.WebSocket;
 
 //TODO: Should I change the way message is handled if it's a command?
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     public class MessageHandler
     {

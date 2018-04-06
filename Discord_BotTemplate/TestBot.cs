@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     class TestBot
     {
@@ -14,6 +14,7 @@ namespace DiscordTestBot
         MessageHandler msgHandler;
         LogHandler logger;
         Settings settings;
+        
         Converter converter;
         ExceptionManager EM;
 
@@ -34,8 +35,8 @@ namespace DiscordTestBot
         private async Task Log(LogMessage message)
         {
             await logger.Handle(message, 
-                converter.StrToBoolT(settings.dict["SaveLogs"]), 
-                converter.StrToBoolT(settings.dict["SaveMessages"]));
+                converter.StrToBoolT(settings.GetValue("SaveLogs")), 
+                converter.StrToBoolT(settings.GetValue("SaveMessages")));
             //await logger.Handle(message);
             await Task.CompletedTask;
         }
@@ -43,10 +44,10 @@ namespace DiscordTestBot
         private async Task Connect(DiscordSocketClient client)
         {
             client.Log += Log;
-            if (settings.dict["Token"] != string.Empty &&
-                EM.CheckToken(client, settings.dict["Token"]))
+            if (settings.GetValue("Token") != string.Empty &&
+                EM.CheckToken(client, settings.GetValue("Token")))
             {
-                await client.LoginAsync(TokenType.Bot, settings.dict["Token"]);
+                await client.LoginAsync(TokenType.Bot, settings.GetValue("Token"));
                 await client.StartAsync();
             }
             await Task.CompletedTask;

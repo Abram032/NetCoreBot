@@ -5,7 +5,7 @@ using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     class ExceptionManager
     {

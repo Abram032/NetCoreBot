@@ -4,7 +4,7 @@ using System.Text;
 
 //TODO: Command Handler Implementation.
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     public class CommandHandler
     {
