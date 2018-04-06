@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     class Converter
     {
-        public bool StrToBoolT(string value)
+        public static bool SettingsStrToBool(string key)
         {
-            try { Convert.ToBoolean(value); }
-            catch { return true; }
-            return Convert.ToBoolean(value);
-        }
-
-        public bool StrToBoolF(string value)
-        {
-            try { Convert.ToBoolean(value); }
-            catch { return false; }
-            return Convert.ToBoolean(value);
+            return ExceptionHandler.StrToBool(key);
         }
     }
 }

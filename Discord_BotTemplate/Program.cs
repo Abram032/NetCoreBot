@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 //TODO: Add the package source to a NuGet.Config file.
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
     class Program
     {

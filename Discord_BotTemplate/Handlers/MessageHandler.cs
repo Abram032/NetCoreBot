@@ -7,30 +7,23 @@ using Discord.WebSocket;
 
 //TODO: Should I change the way message is handled if it's a command?
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
-    public class MessageHandler
+    class MessageHandler
     {
-        LogHandler logger;
-
-        public MessageHandler()
+        public static async Task Handler(DiscordSocketClient client)
         {
-            logger = new LogHandler();
+            client.MessageReceived += MessageRecieved;
+            await Task.CompletedTask;
         }
 
-        private async Task MessageRecieved(SocketMessage message)
+        private static async Task MessageRecieved(SocketMessage message)
         {
-            await logger.Handle(message);
+            await LogHandler.Handle(message);
             if(message.Content.StartsWith("!t") && message.Content.Length >= 2)
             {
                 Console.WriteLine("Command recieved!");
             }
-            await Task.CompletedTask;
-        }
-
-        public async Task Handler(DiscordSocketClient client)
-        {
-            client.MessageReceived += MessageRecieved;
             await Task.CompletedTask;
         }
     }

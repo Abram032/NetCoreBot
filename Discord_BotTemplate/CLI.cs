@@ -5,9 +5,9 @@ using System.Text;
 
 //TODO: Allow for admin-only commands in console.
 
-namespace DiscordTestBot
+namespace Discord_BotTemplate
 {
-    class CLI
+    public class CLI
     {
         public void Main()
         {
