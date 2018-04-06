@@ -10,29 +10,24 @@ namespace Discord_BotTemplate
 {
     public class LogHandler
     {
-        private string enviroPath;
-        private string msgFilePath;
-        private string logFilePath;
-        
-        public LogHandler()
-        {
-            enviroPath = Environment.CurrentDirectory;
-            msgFilePath = Environment.CurrentDirectory + @"/Logs/Messages/" + DateTime.Today.ToShortDateString() + @".log";
-            logFilePath = Environment.CurrentDirectory + @"/Logs/Bot/" + DateTime.Today.ToShortDateString() + @".log";
-        }
+        private static string enviroPath = Environment.CurrentDirectory;
+        private static string msgFilePath = Environment.CurrentDirectory 
+            + @"/Logs/Messages/" + DateTime.Today.ToShortDateString() + @".log";
+        private static string logFilePath = Environment.CurrentDirectory 
+            + @"/Logs/Bot/" + DateTime.Today.ToShortDateString() + @".log";
 
-        public async Task Handle(object obj, bool SaveLogs = true, bool SaveMessages = true)
+        public static async Task Handle(object obj)
         {
             if(!File.Exists(msgFilePath) || !File.Exists(logFilePath))
                 CreateDirectories();
-            if (obj is SocketMessage && SaveMessages)
+            if (obj is SocketMessage && Converter.SettingsStrToBool("SaveMessages"))
                 await LogMessage((SocketMessage)obj);
-            if (obj is LogMessage && SaveLogs)
+            if (obj is LogMessage && Converter.SettingsStrToBool("SaveLogs"))
                 await LogMessage((LogMessage)obj);
             await Task.CompletedTask;
         }
 
-        private async Task LogMessage(SocketMessage message)
+        private static async Task LogMessage(SocketMessage message)
         {
             DateTime dateTime = DateTime.Now;
             string _message = dateTime.ToLongTimeString();
@@ -43,7 +38,7 @@ namespace Discord_BotTemplate
             await Task.CompletedTask;
         }
 
-        private async Task LogMessage(LogMessage message)
+        private static async Task LogMessage(LogMessage message)
         {
             Console.WriteLine(message.ToString());
             using (StreamWriter sw = new StreamWriter(logFilePath, true))
@@ -51,7 +46,7 @@ namespace Discord_BotTemplate
             await Task.CompletedTask;
         }
 
-        private void CreateDirectories()
+        private static void CreateDirectories()
         {
             Directory.CreateDirectory(enviroPath + @"/Logs");
             Directory.CreateDirectory(enviroPath + @"/Logs/Messages");

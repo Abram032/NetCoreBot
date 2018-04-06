@@ -6,23 +6,41 @@ using System.Threading.Tasks;
 
 namespace Discord_BotTemplate
 {
-    public class Settings
+    public sealed class Settings
     {
         private string enviroPath;
         private string filePath;
-        private Dictionary<string, string> dict;
+        private Dictionary<string, string> settings;
+        private Dictionary<string, string> defaultSettings;
+        private static Settings instance = null;
+        private static readonly object syncRoot = new object();
 
-        public Settings()
+        private Settings()
         {
             enviroPath = Environment.CurrentDirectory;
             filePath = Environment.CurrentDirectory + @"/Settings/settings.settings";
-            dict = new Dictionary<string, string>();
-            DefaultKeys();
-            LoadSettings().Wait();
+            settings = new Dictionary<string, string>();
+            defaultSettings = new Dictionary<string, string>();
+            //LoadSettings().Wait();
+        }
+
+        public static Settings Instance
+        {
+            get
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new Settings();
+                }
+                return instance;
+            }
         }
 
         public async Task LoadSettings()
         {
+            DefaultKeys(defaultSettings);
+            DefaultKeys(settings);
             if (File.Exists(filePath))
                 await LoadAll();
             else
@@ -32,32 +50,42 @@ namespace Discord_BotTemplate
 
         public string GetValue(string key)
         {
-            return dict[key];
+            return settings[key];
         }
         
+        //public bool TryGetValue(string key)
+        //{
+        //    return settings.ContainsKey(key);
+        //}
+
+        public string GetDefaultValue(string key)
+        {
+            return defaultSettings[key];
+        }
+
         private async Task CreateSettings()
         {
             Console.WriteLine("Settings file does not exist... Creating.");
             Directory.CreateDirectory(enviroPath + @"/Settings");
-            var keys = dict.Keys;
+            var keys = defaultSettings.Keys;
             using (StreamWriter sw = new StreamWriter(filePath))
             {
-                foreach(string key in keys)
-                    await sw.WriteLineAsync(key + ": " + dict[key]);
+                foreach (string key in keys)
+                    await sw.WriteLineAsync(key + ": " + defaultSettings[key]);
             }
             Console.WriteLine("Please exit and go edit settings file so your bot can connect.");
             await Task.CompletedTask;
         }
-        
+
         private async Task LoadAll()
         {
             using (StreamReader sr = new StreamReader(filePath))
             {
-                while(sr.Peek() >= 0) 
+                while (sr.Peek() >= 0)
                 {
                     string line = sr.ReadLine();
                     string[] pair = SplitLine(line);
-                    dict[pair[0]] = pair[1];
+                    settings[pair[0]] = pair[1];
                 }
             }
             await Task.CompletedTask;
@@ -70,13 +98,13 @@ namespace Discord_BotTemplate
             string[] pair = line.Split(':');
             return pair;
         }
-        
-        private void DefaultKeys()
+
+        private void DefaultKeys(Dictionary<string,string> settings)
         {
-            dict.Add("Token", string.Empty);
-            dict.Add("AdminID", string.Empty);
-            dict.Add("SaveMessages", "true");
-            dict.Add("SaveLogs", "true");
+            settings.Add("Token", string.Empty);
+            settings.Add("AdminID", string.Empty);
+            settings.Add("SaveMessages", "false");
+            settings.Add("SaveLogs", "false");
         }
     }
 }
