@@ -12,6 +12,7 @@ namespace BotUpdater
         {
             updateBot.Start();
             updateBot.Wait();
+            
         }
     }
 }

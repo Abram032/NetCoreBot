@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 Discord_BotTemplate/Properties/PublishProfiles/FolderProfile.pubxml
+BotUpdater/Properties/PublishProfiles/FolderProfile.pubxml
