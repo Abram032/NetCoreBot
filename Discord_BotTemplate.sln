@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord_BotTemplate", "Discord_BotTemplate\Discord_BotTemplate.csproj", "{2024CFE9-42AE-4EEF-BE0E-EB171CBF9CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discord_BotTests", "Discord_BotTests\Discord_BotTests.csproj", "{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord_BotTests", "Discord_BotTests\Discord_BotTests.csproj", "{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotUpdater", "BotUpdater\BotUpdater.csproj", "{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

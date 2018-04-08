@@ -11,6 +11,7 @@ namespace Discord_BotTemplate
     {
         public async Task MainAsync()
         {
+            Info.CreateInfoFile();
             await Settings.Instance.LoadSettings();
             var client = InitClient();
             await Connect(client);
@@ -33,12 +34,19 @@ namespace Discord_BotTemplate
                 await client.LoginAsync(TokenType.Bot, Settings.Instance.GetValue("Token"));
                 await client.StartAsync();
             }
+            else
+                Console.WriteLine("Invalid Token!");
             await Task.CompletedTask;
         }
 
         private DiscordSocketClient InitClient()
         {
             return new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
+        }
+
+        private async Task Disconnect(DiscordSocketClient client)
+        {
+            await client.LogoutAsync();
         }
     }
 }

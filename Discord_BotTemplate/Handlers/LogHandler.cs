@@ -6,8 +6,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
-//TODO: Split CreateDirectories into two methods and create folders after settings are checked not before.
-
 namespace Discord_BotTemplate
 {
     public class LogHandler
@@ -20,12 +18,22 @@ namespace Discord_BotTemplate
 
         public static async Task Handle(object obj)
         {
-            if(!File.Exists(msgFilePath) || !File.Exists(logFilePath))
-                CreateDirectories();
             if (obj is SocketMessage && Converter.SettingsStrToBool("SaveMessages"))
+            {
+                if(!File.Exists(msgFilePath))
+                    CreateMessagesDirectory();
                 await LogMessage((SocketMessage)obj);
+            }       
             if (obj is LogMessage && Converter.SettingsStrToBool("SaveLogs"))
+            {
+                if(!File.Exists(logFilePath))
+                    CreateLogsDirectories();
                 await LogMessage((LogMessage)obj);
+            }
+            if (obj is LogMessage)
+            {
+                await ConsoleLogOutput((LogMessage)obj);
+            }
             await Task.CompletedTask;
         }
 
@@ -41,17 +49,27 @@ namespace Discord_BotTemplate
 
         private static async Task LogMessage(LogMessage message)
         {
-            Console.WriteLine(message.ToString());
             using (StreamWriter sw = new StreamWriter(logFilePath, true))
                 await sw.WriteLineAsync(message.ToString());
             await Task.CompletedTask;
         }
 
-        private static void CreateDirectories()
+        private static async Task ConsoleLogOutput(LogMessage message)
+        {
+            Console.WriteLine(message.ToString());
+            await Task.CompletedTask;
+        }
+
+        private static void CreateLogsDirectories()
+        {
+            Directory.CreateDirectory(enviroPath + @"/Logs");
+            Directory.CreateDirectory(enviroPath + @"/Logs/Bot");
+        }
+
+        private static void CreateMessagesDirectory()
         {
             Directory.CreateDirectory(enviroPath + @"/Logs");
             Directory.CreateDirectory(enviroPath + @"/Logs/Messages");
-            Directory.CreateDirectory(enviroPath + @"/Logs/Bot");
         }
     }
 }
