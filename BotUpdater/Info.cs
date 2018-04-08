@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace Discord_BotTemplate
+namespace BotUpdater
 {
     class Info
     {
-        private static string version = "v0.8a";
+        public static string gitVersion = null;
+        public static string version = "v0.8a";
         private static string site = "https://github.com/Maissae/Discord_BotTemplate";
         private static string filePath = Environment.CurrentDirectory + @"/version.info";
         private static string author = "Maissae";

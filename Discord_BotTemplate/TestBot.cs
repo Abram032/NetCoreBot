@@ -11,7 +11,6 @@ namespace Discord_BotTemplate
     {
         public async Task MainAsync()
         {
-            Info.CreateInfoFile();
             await Settings.Instance.LoadSettings();
             var client = InitClient();
             await Connect(client);
