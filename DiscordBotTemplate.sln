@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord_BotTemplate", "Discord_BotTemplate\Discord_BotTemplate.csproj", "{2024CFE9-42AE-4EEF-BE0E-EB171CBF9CD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscordBotTemplate", "Discord_BotTemplate\DiscordBotTemplate.csproj", "{2024CFE9-42AE-4EEF-BE0E-EB171CBF9CD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discord_BotTests", "Discord_BotTests\Discord_BotTests.csproj", "{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscordBotTests", "Discord_BotTests\DiscordBotTests.csproj", "{7FDF5967-E5BB-4DD0-B2F6-07CB5E0FB117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotUpdater", "BotUpdater\BotUpdater.csproj", "{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotUpdater", "BotUpdater\BotUpdater.csproj", "{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
