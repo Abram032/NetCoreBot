@@ -64,6 +64,13 @@ namespace BotUpdater
             }
         }
 
+        public static void RebuildInfoFile()
+        {
+            info["version"] = gitVersion;
+            File.Delete(filePath);
+            CreateInfoFile();
+        }
+
         private static string[] SplitLine(string line)
         {
             line = line.Trim();

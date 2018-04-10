@@ -17,32 +17,21 @@ namespace BotUpdater
         {
             string[] files = Directory.GetFiles(dirDeploy, "*.*", SearchOption.AllDirectories);
             Directory.CreateDirectory(Environment.CurrentDirectory + @"/Backup");
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 FileInfo fileInfo = new FileInfo(file);
-                if(File.Exists(dirMain + fileInfo.Name))
-                    File.Replace(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name, dirBackup + fileInfo.Name);
-                else
-                    File.Move(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name);
-                //fileInfo.Replace(Environment.CurrentDirectory, Environment.CurrentDirectory + @"/Backup", true);
+                if (!fileInfo.Name.Contains("Launch"))
+                {
+                    Console.WriteLine(fileInfo.Name);
+                    if (File.Exists(dirMain + fileInfo.Name))
+                        File.Replace(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name, dirBackup + fileInfo.Name);
+                    else
+                        File.Move(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name);
+                    //fileInfo.Replace(Environment.CurrentDirectory, Environment.CurrentDirectory + @"/Backup", true);
+                    Console.WriteLine("End");
+                }
             }
-            await RemoveBackup();
-            await Task.CompletedTask;
-        }
-
-        private static async Task RemoveBackup()
-        {
-            string[] filesDeploy = Directory.GetFiles(dirDeploy, "*.*", SearchOption.AllDirectories);
-            string[] filesBackup = Directory.GetFiles(dirBackup, "*.*", SearchOption.AllDirectories);
-
-            foreach(string file in filesDeploy)
-                File.Delete(file);
-            foreach(string file in filesBackup)
-                File.Delete(file);
-
-            Directory.Delete(Environment.CurrentDirectory + @"/Update/Deploy");
-            Directory.Delete(Environment.CurrentDirectory + @"/Update");
-            Directory.Delete(Environment.CurrentDirectory + @"/Backup");
+            Info.RebuildInfoFile();
             await Task.CompletedTask;
         }
     }
