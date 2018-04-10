@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BotUpdater
 {
-    class Update
+    class UpdateBot
     {
         public async Task MainAsync()
         {
@@ -13,7 +13,7 @@ namespace BotUpdater
             Console.WriteLine("Checking for updates...");
             await CheckUpdates.CheckVersion();
             string reply = string.Empty;
-            if(Info.gitVersion.Equals(string.Empty))
+            if(Info.gitVersion.Equals(string.Empty) || Info.downloadURL.Equals(string.Empty))
             {
                 Console.WriteLine("Update failed.");
                 return;
@@ -28,9 +28,15 @@ namespace BotUpdater
                         break;
                 }
                 if(reply.Equals("y"))
-                    Console.WriteLine("UPDATE");
+                {
+                    await Downloader.DownloadUpdate();
+                    await Updater.UpdateFiles();
+                }
+                else
+                    return;
             }
-            Console.WriteLine("Bot is up to date.");
+            else
+                Console.WriteLine("Bot is up to date.");
             await Task.CompletedTask;
         }
     }

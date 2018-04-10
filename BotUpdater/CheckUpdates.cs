@@ -14,6 +14,7 @@ namespace BotUpdater
         public static async Task CheckVersion()
         {
             string version = string.Empty;
+            string downloadURL = string.Empty;
             if(!ExceptionHandler.CheckConnection())
             {
                 Console.WriteLine("Connection could not be established.");
@@ -26,18 +27,14 @@ namespace BotUpdater
                     ("https://github.com/Maissae/Discord_BotTemplate/blob/dev/README.md").Split('\n');
                 foreach(string line in htmlCode)
                 {
-                    //Console.WriteLine(line);
                     if(line.Contains("Current version"))
                         version = line;
+                    if(line.Contains("Download"))
+                        downloadURL = line;
                 }
             }
-            //Console.WriteLine(version);
-            version = version.Trim();
-            version = version.Replace(" ", string.Empty);
-            version = version.Replace("</p>", string.Empty);
-            version = Split(version);
-            //Console.WriteLine(version);
-            Info.gitVersion = version;
+            Info.gitVersion = ExtractVersion(version);
+            Info.downloadURL = ExtractURL(downloadURL);
             await Task.CompletedTask;
         }
 
@@ -45,6 +42,26 @@ namespace BotUpdater
         {
             string[] info = line.Split(':');
             return info[info.Length-1];
+        }
+
+        private static string ExtractVersion(string version)
+        {
+            version = version.Trim();
+            version = version.Replace(" ", string.Empty);
+            version = version.Replace("</p>", string.Empty);
+            version = Split(version);
+            return version;
+        }
+
+        private static string ExtractURL(string URL)
+        {
+            URL = URL.Trim();
+            URL = URL.Replace(" ", string.Empty);
+            string[] split = URL.Split('"');
+            if(split.Length < 2)
+                return string.Empty;
+            URL = split[1];
+            return URL;
         }
     }
 }

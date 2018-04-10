@@ -9,6 +9,7 @@ namespace BotUpdater
     class Info
     {
         public static string gitVersion = string.Empty;
+        public static string downloadURL = string.Empty;
         private static Dictionary<string, string> info = FillDictionary();
         private static string filePath = Environment.CurrentDirectory + @"/version.info";
 
