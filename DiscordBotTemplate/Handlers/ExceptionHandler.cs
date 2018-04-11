@@ -16,8 +16,7 @@ namespace Discord_BotTemplate
                 client.LoginAsync(TokenType.Bot, token).Wait();
             }
             catch
-            {
-                Console.WriteLine("Invalid Token!");
+            {          
                 return false;
             }
             return true;

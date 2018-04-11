@@ -20,7 +20,8 @@ namespace Discord_BotTemplate
         private static async Task MessageRecieved(SocketMessage message)
         {
             await LogHandler.Handle(message);
-            if(message.Content.StartsWith("!t") && message.Content.Length >= 2)
+            if(message.Content.StartsWith(Settings.Instance.GetValue("CommandPrefix")) 
+                && message.Content.Length >= 2)
             {
                 Console.WriteLine("Command recieved!");
             }
