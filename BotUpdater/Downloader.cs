@@ -27,11 +27,11 @@ namespace BotUpdater
             ExtractZip();
             await Task.CompletedTask;
         }
-
+        
         private static void ExtractZip()
         {
-            Directory.CreateDirectory(Environment.CurrentDirectory + @"/Update");
-            ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory + @"/Update");
+            Directory.CreateDirectory(Environment.CurrentDirectory);
+            ZipFile.ExtractToDirectory("update.zip", Environment.CurrentDirectory);
             File.Delete("update.zip");
         }
     }

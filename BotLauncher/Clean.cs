@@ -8,11 +8,11 @@ namespace BotLauncher
 {
     class Clean
     {
-        private static string dirDeploy = Environment.CurrentDirectory + @"/Update/Deploy/";
-        private static string dirUpdate = Environment.CurrentDirectory + @"/Update/";
+        private static string dirDeploy = Environment.CurrentDirectory + @"/Deploy/";
+        //private static string dirUpdate = Environment.CurrentDirectory + @"/Update/";
         private static string dirBackup = Environment.CurrentDirectory + @"/Backup/";
         private static string dirMain = Environment.CurrentDirectory + @"/";
-
+        
         public static async Task CleanUp()
         {
             string[] filesDeploy = null;
@@ -29,11 +29,9 @@ namespace BotLauncher
                 foreach(string file in filesBackup)
                     File.Delete(file);
             if(Directory.Exists(dirDeploy))
-                Directory.Delete(Environment.CurrentDirectory + @"/Update/Deploy");
-            if(Directory.Exists(dirUpdate))
-                Directory.Delete(Environment.CurrentDirectory + @"/Update");
+                Directory.Delete(dirDeploy);
             if(Directory.Exists(dirBackup))
-                Directory.Delete(Environment.CurrentDirectory + @"/Backup");
+                Directory.Delete(dirBackup);
             await Task.CompletedTask;
         }
     }

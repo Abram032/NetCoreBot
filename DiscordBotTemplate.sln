@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscordBotTests", "DiscordB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotUpdater", "BotUpdater\BotUpdater.csproj", "{2A831F3C-7DCB-458C-8F94-D150AC8EACC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotLauncher", "BotLauncher\BotLauncher.csproj", "{F6285892-8198-4327-BBF2-B5D7EEBE1340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotLauncher", "BotLauncher\BotLauncher.csproj", "{F6285892-8198-4327-BBF2-B5D7EEBE1340}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

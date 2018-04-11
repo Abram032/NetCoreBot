@@ -8,8 +8,8 @@ namespace BotUpdater
 {
     class Updater
     {
-        private static string dirDeploy = Environment.CurrentDirectory + @"/Update/Deploy/";
-        private static string dirUpdate = Environment.CurrentDirectory + @"/Update/";
+        private static string dirDeploy = Environment.CurrentDirectory + @"/Deploy/";
+        //private static string dirUpdate = Environment.CurrentDirectory + @"/Update/";
         private static string dirBackup = Environment.CurrentDirectory + @"/Backup/";
         private static string dirMain = Environment.CurrentDirectory + @"/";
 

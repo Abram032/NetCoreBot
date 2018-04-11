@@ -25,7 +25,7 @@ namespace BotUpdater
         private static Dictionary<string, string> FillDictionary()
         {
             Dictionary<string, string> info = new Dictionary<string, string>();
-            info.Add("version", "1.4a");
+            info.Add("version", "1.6a");
             info.Add("author", "Maissae");
             info.Add("site", "https://github.com/Maissae/Discord_BotTemplate");
             return info;
