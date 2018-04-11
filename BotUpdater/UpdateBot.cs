@@ -9,7 +9,6 @@ namespace BotUpdater
     {
         public async Task MainAsync()
         {
-            await Info.LoadInfo();
             Console.WriteLine("Checking for updates...");
             await CheckUpdates.CheckVersion();
             if (Info.gitVersion.Equals(string.Empty) || Info.downloadURL.Equals(string.Empty))
@@ -25,6 +24,7 @@ namespace BotUpdater
             {
                 Console.WriteLine("Bot is up to date.");
             }
+            Console.WriteLine("Version: " + Info.GetValue("version"));
             await Task.CompletedTask;
         }
 
@@ -32,6 +32,7 @@ namespace BotUpdater
         {
             await Downloader.DownloadUpdate();
             await Updater.UpdateFiles();
+            Info.SetValue("version", Info.gitVersion);
         }
 
         private string UpdateResponse()

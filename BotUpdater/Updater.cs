@@ -29,7 +29,6 @@ namespace BotUpdater
                         File.Move(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name);
                 }
             }
-            Info.RebuildInfoFile();
             Console.WriteLine("Update complete.");
             await Task.CompletedTask;
         }
