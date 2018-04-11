@@ -15,6 +15,7 @@ namespace BotUpdater
 
         public static async Task UpdateFiles()
         {
+            Console.WriteLine("Updating...");
             string[] files = Directory.GetFiles(dirDeploy, "*.*", SearchOption.AllDirectories);
             Directory.CreateDirectory(Environment.CurrentDirectory + @"/Backup");
             foreach (string file in files)
@@ -22,16 +23,14 @@ namespace BotUpdater
                 FileInfo fileInfo = new FileInfo(file);
                 if (!fileInfo.Name.Contains("Launch"))
                 {
-                    Console.WriteLine(fileInfo.Name);
                     if (File.Exists(dirMain + fileInfo.Name))
                         File.Replace(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name, dirBackup + fileInfo.Name);
                     else
                         File.Move(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name);
-                    //fileInfo.Replace(Environment.CurrentDirectory, Environment.CurrentDirectory + @"/Backup", true);
-                    Console.WriteLine("End");
                 }
             }
             Info.RebuildInfoFile();
+            Console.WriteLine("Update complete.");
             await Task.CompletedTask;
         }
     }

@@ -15,7 +15,7 @@ namespace BotUpdater
         {
             string version = string.Empty;
             string downloadURL = string.Empty;
-            if(!ExceptionHandler.CheckConnection())
+            if(!CheckConnection())
             {
                 Console.WriteLine("Connection could not be established.");
                 Console.WriteLine("Please check your internet connection and try again.");
@@ -62,6 +62,11 @@ namespace BotUpdater
                 return string.Empty;
             URL = split[1];
             return URL;
+        }
+
+        private static bool CheckConnection()
+        {
+            return ExceptionHandler.CheckConnection();
         }
     }
 }
