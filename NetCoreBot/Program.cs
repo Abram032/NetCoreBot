@@ -7,6 +7,7 @@ using NetCoreBot.Repository.Interfaces;
 
 //TODO: Fix up crashes on unauthorized connection. (Invalid token)
 //TODO: Should I use Singleton for settings to avoid passing token through app?
+//TODO: Check out CQRS pattern.
 //TODO: Add log handler.
 //TODO: Add Converter.
 //TODO: Add ExceptionHandler.
@@ -21,10 +22,16 @@ namespace NetCoreBot
 {
     class Program
     {   
-        static IConnect connect = new Connect();
-        static ISettings settings = new Settings();
+        static IConnectionManager connectionHandler = new ConnectionManager(Settings.Instance);
+        static IMessageHandler messageHandler = new MessageHandler(connectionHandler, Settings.Instance);
+        static ILogHandler logHandler = new LogHandler(connectionHandler, Settings.Instance);
 
-        public static void Bot() => new Bot(connect, settings).MainAsync().GetAwaiter().GetResult();
+        public static void Bot() => new Bot(
+            connectionHandler, 
+            Settings.Instance, 
+            messageHandler
+            
+            ).MainAsync().GetAwaiter().GetResult();
         public static void Terminal() => new Terminal().Main();
         static Task bot = new Task(Bot);
         static Task terminal = new Task(Terminal);

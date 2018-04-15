@@ -9,19 +9,22 @@ namespace NetCoreBot
 {
     class Bot
     {
-        IConnect connect;
-        ISettings settings;
+        IConnectionManager _connectionManager;
+        IMessageHandler _messageHandler;
+        ISettings _settings;
 
-        public Bot(IConnect _connect, ISettings _settings)
+        public Bot(IConnectionManager connect, ISettings settings, IMessageHandler messageHandler)
         {
-            connect = _connect;
-            settings = _settings;
+            _connectionManager = connect;
+            _messageHandler = messageHandler;
+            _settings = settings;
         }
 
         public async Task MainAsync()
         {
-            await settings.LoadSettings();
-            await connect.ClientConnect(settings.GetValue("Token"));
+            await _settings.LoadSettings();
+            await _connectionManager.ClientConnect();
+            await _messageHandler.Handler();
             await Task.Delay(-1);
         }
     }

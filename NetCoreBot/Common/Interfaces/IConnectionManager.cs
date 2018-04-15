@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Common.Interfaces
 {
-    public interface IConnect
+    public interface IConnectionManager
     {
-        Task ClientConnect(string token);
+        Task ClientConnect();
+        object GetClient();
     }
 }

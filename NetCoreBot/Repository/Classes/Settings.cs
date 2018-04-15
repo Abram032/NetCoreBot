@@ -4,6 +4,7 @@ using System.Text;
 using NetCoreBot.Repository.Interfaces;
 using System.Threading.Tasks;
 using System.IO;
+using NetCoreBot.Common.Classes;
 
 namespace NetCoreBot.Repository.Classes
 {
@@ -13,8 +14,10 @@ namespace NetCoreBot.Repository.Classes
         private Dictionary<string, string> defaultSettings;
         private string filePath = Environment.CurrentDirectory + @"/Settings/config.ini";
         private string directoryPath = Environment.CurrentDirectory + @"/Settings";
+        private static Settings instance = null;
+        private static readonly object syncRoot = new object();
 
-        public Settings()
+        private Settings()
         {
             settings = new Dictionary<string, string>();
             defaultSettings = new Dictionary<string, string>();
@@ -22,6 +25,19 @@ namespace NetCoreBot.Repository.Classes
                 CreateSettings().Wait();
             InitSettings(defaultSettings);
             InitSettings(settings);
+        }
+
+        public static ISettings Instance
+        {
+            get
+            {
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                        instance = new Settings();
+                }
+                return instance;
+            }
         }
 
         private async Task CreateSettings()
@@ -75,7 +91,7 @@ namespace NetCoreBot.Repository.Classes
             line = line.Trim();
             line = line.Replace(" ", string.Empty);
             string[] pairs = line.Split(':');
-            if(pairs.Length > index)
+            if (pairs.Length > index)
                 return pairs[index];
             else
                 return string.Empty;
@@ -83,13 +99,13 @@ namespace NetCoreBot.Repository.Classes
 
         private void InitSettings(Dictionary<string, string> settings)
         {
-            settings.Add("Token", string.Empty);
-            settings.Add("OwnerID", string.Empty);
-            settings.Add("SaveMessages", "false");
-            settings.Add("SaveLogs", "false");
-            settings.Add("CommandPrefix", "!t");
-            settings.Add("DeleteMessages", "false");
-            settings.Add("DeleteCommandMessages", "false");
+            settings.Add(SettingKeys.Token, string.Empty);
+            settings.Add(SettingKeys.OwnerID, string.Empty);
+            settings.Add(SettingKeys.SaveMessages, "false");
+            settings.Add(SettingKeys.SaveLogs, "false");
+            settings.Add(SettingKeys.CommandPrefix, "!t");
+            settings.Add(SettingKeys.DeleteMessages, "false");
+            settings.Add(SettingKeys.DeleteCommandMessages, "false");
         }
 
         private async Task CreateSettingsFile()
@@ -101,34 +117,34 @@ namespace NetCoreBot.Repository.Classes
                 await sw.WriteLineAsync("# Put your token here so your bot can connect.");
                 await sw.WriteLineAsync("# You can get your app token from here https://discordapp.com/developers/applications/me");
                 await sw.WriteLineAsync("# Example: Token: 123456789xyzabc");
-                await sw.WriteLineAsync("Token: ");
+                await sw.WriteLineAsync(SettingKeys.Token + ": ");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Your owner ID, gives you privileges to use owner only commands from chat.");
                 await sw.WriteLineAsync("# To get your ID, right click on yourself in the chat and Copy ID.");
                 await sw.WriteLineAsync("# Example: 1234567890");
-                await sw.WriteLineAsync("OwnerID: ");
+                await sw.WriteLineAsync(SettingKeys.OwnerID + ": ");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Saves all incomming messages to a file.");
                 await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync("SaveMessages: false");
+                await sw.WriteLineAsync(SettingKeys.SaveMessages + ": false");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Saves all incomming console logs to a file.");
                 await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync("SaveLogs: false");
+                await sw.WriteLineAsync(SettingKeys.SaveLogs + ": false");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Command prefix for all your bot commands.");
                 await sw.WriteLineAsync("# Can be any you like for example: '!', '*', ';' etc.");
                 await sw.WriteLineAsync("# It can also be a string of characters like: \"!t\", \"!test\" etc.");
                 await sw.WriteLineAsync("# Default: !t");
-                await sw.WriteLineAsync("CommandPrefix: !t");
+                await sw.WriteLineAsync(SettingKeys.CommandPrefix + ": !t");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Deletes messages that bot sends after a while.");
                 await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync("DeleteMessages: false");
+                await sw.WriteLineAsync(SettingKeys.DeleteMessages + ": false");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Deletes messages that are command calls after a while.");
                 await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync("DeleteCommandMessages: false");
+                await sw.WriteLineAsync(SettingKeys.DeleteCommandMessages + ": false");
             }
             await Task.CompletedTask;
         }
