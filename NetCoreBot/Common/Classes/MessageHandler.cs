@@ -6,21 +6,21 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Figure out how to pass interfaces between classes. Can and should I do that?
-
 namespace NetCoreBot.Common.Classes
 {
     class MessageHandler : IMessageHandler
     {
         private ISettings _settings;
         private IConnectionManager _connectionManager;
+        private ILogHandler _logHandler;
         private DiscordSocketClient client { get; set; } = null;
         private string commandPrefix { get; set; } = null;
 
-        public MessageHandler(IConnectionManager connectionManager, ISettings settings)
+        public MessageHandler(IConnectionManager connectionManager, ISettings settings, ILogHandler logHandler)
         {
             _connectionManager = connectionManager;
             _settings = settings;
+            _logHandler = logHandler;
         }
 
         public async Task Handler()
@@ -40,7 +40,7 @@ namespace NetCoreBot.Common.Classes
 
         private async Task MessageRecieved(SocketMessage message)
         {
-            //await LogHandler.Handle(message);
+            await _logHandler.Handle(message);
             if (message.Content.StartsWith(commandPrefix)
                 && message.Content.Length >= 2)
             {

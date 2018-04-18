@@ -1,21 +1,22 @@
-﻿using System;
+﻿using NetCoreBot.Repository.Classes;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net;
-using System.IO;
 
-//TODO: Change link from /dev/ tree to /master/ tree after tests.
+//TODO: Change link from dev to master.
 
-namespace BotUpdater
+namespace NetCoreBot.Updater.Classes
 {
-    class CheckUpdates
+    class UpdateChecker
     {
-        public static async Task CheckVersion()
+        private string gitVersion = string.Empty; 
+        private string downloadLink = string.Empty; 
+
+        public async Task CheckVersion()
         {
-            string version = string.Empty;
-            string downloadURL = string.Empty;
-            if(!CheckConnection())
+            if(CheckConnection() == false)
             {
                 Console.WriteLine("Connection could not be established.");
                 Console.WriteLine("Please check your internet connection and try again.");
@@ -24,27 +25,27 @@ namespace BotUpdater
             using (WebClient client = new WebClient())
             {
                 string[] htmlCode = client.DownloadString
-                    ("https://github.com/Maissae/Discord_BotTemplate/blob/dev/README.md").Split('\n');
+                    (Info.gitProjectReadmeLink).Split('\n');
                 foreach(string line in htmlCode)
                 {
                     if(line.Contains("Current version"))
-                        version = line;
+                        gitVersion = line;
                     if(line.Contains("Download"))
-                        downloadURL = line;
+                        downloadLink = line;
                 }
             }
-            Info.gitVersion = ExtractVersion(version);
-            Info.downloadURL = ExtractURL(downloadURL);
+            Info.GitVersion = ExtractVersion(gitVersion);
+            Info.DownloadLink = ExtractURL(downloadLink);
             await Task.CompletedTask;
         }
 
-        private static string Split(string line)
+        private string Split(string line)
         {
             string[] info = line.Split(':');
             return info[info.Length-1];
         }
 
-        private static string ExtractVersion(string version)
+        private string ExtractVersion(string version)
         {
             version = version.Trim();
             version = version.Replace(" ", string.Empty);
@@ -53,7 +54,7 @@ namespace BotUpdater
             return version;
         }
 
-        private static string ExtractURL(string URL)
+        private string ExtractURL(string URL)
         {
             URL = URL.Trim();
             URL = URL.Replace(" ", string.Empty);
@@ -64,9 +65,19 @@ namespace BotUpdater
             return URL;
         }
 
-        private static bool CheckConnection()
+        private bool CheckConnection()
         {
-            return ExceptionHandler.CheckConnection();
+            WebClient client = new WebClient();
+            try
+            {
+                string htmlCode = client.DownloadString
+                    ("https://github.com/Maissae/Discord_BotTemplate/blob/master/README.md");
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

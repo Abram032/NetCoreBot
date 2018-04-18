@@ -4,6 +4,7 @@ using NetCoreBot.Common.Interfaces;
 using NetCoreBot.Repository.Interfaces;
 using System.Collections.Generic;
 using System.Text;
+using NetCoreBot.Updater.Interfaces;
 
 namespace NetCoreBot
 {

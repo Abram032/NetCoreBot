@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetCoreBot.Common.Interfaces
+namespace NetCoreBot.Updater.Interfaces
 {
-    public interface ILogHandler
+    interface ICleaner
     {
-        Task Handle(object obj);
+        Task CleanUp();
     }
 }

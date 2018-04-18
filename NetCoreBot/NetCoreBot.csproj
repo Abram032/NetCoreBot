@@ -9,4 +9,15 @@
     <PackageReference Include="Discord.Net" Version="2.0.0-beta" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Run.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Interfaces\" />
+    <Folder Include="Commands\Classes\" />
+  </ItemGroup>
+
 </Project>

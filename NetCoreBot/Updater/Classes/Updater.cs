@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text;
+using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BotUpdater
+namespace NetCoreBot.Updater.Classes
 {
     class Updater
     {
-        private static string dirDeploy = Environment.CurrentDirectory + @"/Deploy/";
-        //private static string dirUpdate = Environment.CurrentDirectory + @"/Update/";
-        private static string dirBackup = Environment.CurrentDirectory + @"/Backup/";
-        private static string dirMain = Environment.CurrentDirectory + @"/";
+        private readonly string dirDeploy = Environment.CurrentDirectory + @"/Deploy/";
+        private readonly string dirBackup = Environment.CurrentDirectory + @"/Backup/";
+        private readonly string dirMain = Environment.CurrentDirectory + @"/";
 
-        public static async Task UpdateFiles()
+        public async Task UpdateFiles()
         {
             Console.WriteLine("Updating...");
             string[] files = Directory.GetFiles(dirDeploy, "*.*", SearchOption.AllDirectories);
@@ -29,7 +29,9 @@ namespace BotUpdater
                         File.Move(dirDeploy + fileInfo.Name, dirMain + fileInfo.Name);
                 }
             }
-            Console.WriteLine("Update complete.");
+            Console.WriteLine("Update complete. Please restart application.");
+            Console.ReadKey();
+            Environment.Exit(0);
             await Task.CompletedTask;
         }
     }
