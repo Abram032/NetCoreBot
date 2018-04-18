@@ -1,5 +1,5 @@
 # Discord Bot Template
-Tempate Discord bot made in .Net Core.
+Bot template made in .Net Core.
 
 Current version: 2.1.0
 
