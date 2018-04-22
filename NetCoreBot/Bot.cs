@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NetCoreBot.Common.Interfaces;
-using NetCoreBot.Repository.Interfaces;
+using NetCoreBot.Common.Abstract;
+using NetCoreBot.Repository.Abstract;
 using System.Collections.Generic;
 using System.Text;
-using NetCoreBot.Updater.Interfaces;
+using NetCoreBot.Updater.Abstract;
+
+//Command Pattern
+//Repository Pattern
 
 namespace NetCoreBot
 {

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using NetCoreBot.Common.Classes;
-using NetCoreBot.Common.Interfaces;
-using NetCoreBot.Repository.Classes;
-using NetCoreBot.Repository.Interfaces;
-using NetCoreBot.Updater.Classes;
-using NetCoreBot.Updater.Interfaces;
+using NetCoreBot.Commands.Concrete;
+using NetCoreBot.Commands.Abstract;
+using NetCoreBot.Common.Concrete;
+using NetCoreBot.Common.Abstract;
+using NetCoreBot.Repository.Concrete;
+using NetCoreBot.Repository.Abstract;
+using NetCoreBot.Updater.Concrete;
+using NetCoreBot.Updater.Abstract;
 
 //TODO: Check out CQRS pattern.
 //TODO: Add Converter.
@@ -20,7 +22,8 @@ namespace NetCoreBot
         static IUpdateManager updateManager = new UpdateManager();
         static ILogHandler logHandler = new LogHandler(Settings.Instance);
         static IConnectionManager connectionHandler = new ConnectionManager(Settings.Instance);
-        static IMessageHandler messageHandler = new MessageHandler(connectionHandler, Settings.Instance, logHandler);
+        static ICommandService commandService = new CommandService(Settings.Instance);
+        static IMessageHandler messageHandler = new MessageHandler(connectionHandler, Settings.Instance, logHandler, commandService);
 
         public static void BotUpdater() => new BotUpdater(updateManager, cleaner).MainAsync().GetAwaiter().GetResult();
         public static void Bot() => new Bot(connectionHandler, Settings.Instance, messageHandler).MainAsync().GetAwaiter().GetResult();

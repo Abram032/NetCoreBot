@@ -1,4 +1,4 @@
-﻿using NetCoreBot.Updater.Interfaces;
+﻿using NetCoreBot.Updater.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
