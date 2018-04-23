@@ -14,48 +14,30 @@ namespace NetCoreBot.Common.Concrete
     class LogHandler : ILogHandler
     {
         private ISettings _settings;
+        private IConverter converter;
         private string enviroPath = Environment.CurrentDirectory;
-        private string msgFilePath = Environment.CurrentDirectory 
-            + @"/Logs/Messages/" + DateTime.Today.ToShortDateString() + @".log";
         private string logFilePath = Environment.CurrentDirectory 
-            + @"/Logs/Bot/" + DateTime.Today.ToShortDateString() + @".log";
+            + @"/Logs/" + DateTime.Today.ToShortDateString() + @".log";
 
         public LogHandler(ISettings settings)
         {
             _settings = settings;
+            converter = new Converter();
         }
 
-        public async Task Handle(object obj)
+        public async Task Handle(object log)
         {
-            if (obj is SocketMessage && ExceptionHandler.StrToBool(SettingKeys.SaveMessages))
-            {
-                if(!File.Exists(msgFilePath))
-                    CreateMessagesDirectory();
-                await LogMessage((SocketMessage)obj);
-            }       
-            if (obj is LogMessage && ExceptionHandler.StrToBool(SettingKeys.SaveLogs))
+            var _log = (LogMessage)log;
+            if (converter.StringToBool(SettingKeys.SaveLogs))
             {
                 if(!File.Exists(logFilePath))
                     CreateLogsDirectories();
-                await LogMessage((LogMessage)obj);
+                await LogMessage(_log);
             }
-            if (obj is LogMessage)
-            {
-                await ConsoleLogOutput((LogMessage)obj);
-            }
+            await ConsoleLogOutput(_log);
             await Task.CompletedTask;
         }
-
-        private async Task LogMessage(SocketMessage message)
-        {
-            DateTime dateTime = DateTime.Now;
-            string _message = dateTime.ToLongTimeString();
-            _message += " { " + message.Channel + " } ( " + message.Author + " ) : " + message.Content;
-            using (StreamWriter sw = new StreamWriter(msgFilePath, true))
-                await sw.WriteLineAsync(_message);
-            await Task.CompletedTask;
-        }
-
+        
         private async Task LogMessage(LogMessage message)
         {
             using (StreamWriter sw = new StreamWriter(logFilePath, true))
@@ -72,13 +54,6 @@ namespace NetCoreBot.Common.Concrete
         private void CreateLogsDirectories()
         {
             Directory.CreateDirectory(enviroPath + @"/Logs");
-            Directory.CreateDirectory(enviroPath + @"/Logs/Bot");
-        }
-
-        private void CreateMessagesDirectory()
-        {
-            Directory.CreateDirectory(enviroPath + @"/Logs");
-            Directory.CreateDirectory(enviroPath + @"/Logs/Messages");
         }
     }
 }

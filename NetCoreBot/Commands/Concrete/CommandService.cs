@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//TODO: Move MessageDetails to commmon, should create at message recieved and passed around to MessageWriter.
+//TODO: Use Tasks and asynchronus methods. Duh.
+
 namespace NetCoreBot.Commands.Concrete
 {
     public class CommandService : ICommandService
@@ -39,7 +42,7 @@ namespace NetCoreBot.Commands.Concrete
             List<string> _parameters = GetParameters(_message);
             _message = GetCommand(_message);
 
-            ICommandFactory commandFactory = new CommandFactory();
+            ICommandBuilder commandFactory = new CommandBuilder();
             ICommand command = commandFactory.BuildCommand(_message, _parameters);
             return command;
         }
@@ -52,7 +55,7 @@ namespace NetCoreBot.Commands.Concrete
             _message = GetCommand(_message);
             var _messageDetails = new MessageDetails(socketMessage);
 
-            ICommandFactory commandFactory = new CommandFactory();
+            ICommandBuilder commandFactory = new CommandBuilder();
             ICommand command = commandFactory.BuildCommand(_message, _parameters, _messageDetails);
             return command;
         }

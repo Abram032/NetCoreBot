@@ -45,13 +45,11 @@ namespace NetCoreBot.Common.Concrete
 
         private async Task MessageRecieved(SocketMessage message)
         {
-            await _logHandler.Handle(message);
             if (message.Content.StartsWith(commandPrefix)
                 && message.Content.Length >= 2)
             {
                 _commandService.ExecuteCommand(message);
             }
-            //Console.WriteLine(message.ToString());
             await Task.CompletedTask;
         }
     }

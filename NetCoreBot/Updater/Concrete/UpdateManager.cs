@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Loose coupling.
+//TODO: Loose coupling, Implement interfaces for each classes.
 
 namespace NetCoreBot.Updater.Concrete
 {

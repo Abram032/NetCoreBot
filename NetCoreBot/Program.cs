@@ -9,6 +9,10 @@ using NetCoreBot.Repository.Abstract;
 using NetCoreBot.Updater.Concrete;
 using NetCoreBot.Updater.Abstract;
 
+//TODO: Set bot status as playing game: "prefix help"
+//TODO: Figure out the namespace for commands implementation. Separate it from command managers.
+//TODO: Implement MessageWriter.
+//TODO: Implement database. Should I use JSON or something else?
 //TODO: Check out CQRS pattern.
 //TODO: Add Converter.
 //TODO: Add CommandHandler.

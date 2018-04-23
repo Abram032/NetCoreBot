@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using NetCoreBot.Repository.Abstract;
 
+//TODO: Remove ExceptionHandler and push method into local class.
+
 namespace NetCoreBot.Common.Concrete
 {
     class ConnectionManager : IConnectionManager

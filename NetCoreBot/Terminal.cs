@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 
 //TODO: Allow for admin-only commands in console.
+//TODO: Implement commands into console.
 
 namespace NetCoreBot
 {

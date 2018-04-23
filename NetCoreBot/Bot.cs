@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 using NetCoreBot.Updater.Abstract;
 
-//Command Pattern
-//Repository Pattern
+//TODO: Check out Command Pattern
+//TODO: Check out Repository Pattern
 
 namespace NetCoreBot
 {

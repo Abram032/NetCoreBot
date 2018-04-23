@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NetCoreBot.Commands.Abstract
 {
-    public interface ICommandReciever
+    public interface ICommandWriter
     {
         void ReturnStatus(string message, bool isCli = false);
     }

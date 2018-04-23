@@ -31,6 +31,7 @@ namespace NetCoreBot.Updater.Concrete
             }
             Console.WriteLine("Update complete. Please restart application.");
             Console.ReadKey();
+            Process.Start(dirMain + "Run.bat");
             Environment.Exit(0);
             await Task.CompletedTask;
         }

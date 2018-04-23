@@ -8,7 +8,6 @@ namespace NetCoreBot.Resources
     {
         public const string Token = "Token";
         public const string OwnerID = "OwnerID";
-        public const string SaveMessages = "SaveMessages";
         public const string SaveLogs = "SaveLogs";
         public const string CommandPrefix = "CommandPrefix";
         public const string DeleteMessages = "DeleteMessages";

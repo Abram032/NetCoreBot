@@ -15,4 +15,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\Concrete\" />
+    <Folder Include="Repository\Abstract\" />
+  </ItemGroup>
+
 </Project>

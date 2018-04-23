@@ -9,9 +9,9 @@ namespace NetCoreBot.Commands.Concrete
 {
     public class MessageDetails
     {
-        public MessageSource Source { get; set; } = 0;
-        public ISocketMessageChannel Channel { get; set; } = null;
-        public SocketUser Author { get; set; } = null;
+        public MessageSource Source { get; private set; } = 0;
+        public ISocketMessageChannel Channel { get; private set; } = null;
+        public SocketUser Author { get; private set; } = null;
 
         public MessageDetails(SocketMessage message)
         {

@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+//TODO: Move CommandWriter to MessageWriter in Common, spearate Commands from API.
+
 namespace NetCoreBot.Commands.Concrete
 {
-    public class CommandReciever : ICommandReciever
+    public class CommandWriter : ICommandWriter
     {
         private MessageDetails _messageDetails;
 
-        public CommandReciever(MessageDetails messageDetails)
+        public CommandWriter(MessageDetails messageDetails)
         {
             _messageDetails = messageDetails;
         }
@@ -23,9 +25,10 @@ namespace NetCoreBot.Commands.Concrete
                 SendMessageAsync(message).Wait();
         }
 
-        private async Task SendMessageAsync(string _message)
+        private async Task SendMessageAsync(string message)
         {
-            await _messageDetails.Channel.SendMessageAsync(_message);
+            string _message = "@ " + _messageDetails.Author + " " + message;
+            await _messageDetails.Channel.SendMessageAsync(message);
         }
     }
 }

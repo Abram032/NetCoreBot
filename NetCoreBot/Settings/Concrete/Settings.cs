@@ -101,7 +101,6 @@ namespace NetCoreBot.Repository.Concrete
         {
             settings.Add(SettingKeys.Token, string.Empty);
             settings.Add(SettingKeys.OwnerID, string.Empty);
-            settings.Add(SettingKeys.SaveMessages, "false");
             settings.Add(SettingKeys.SaveLogs, "false");
             settings.Add(SettingKeys.CommandPrefix, "!t");
             settings.Add(SettingKeys.DeleteMessages, "false");
@@ -123,10 +122,6 @@ namespace NetCoreBot.Repository.Concrete
                 await sw.WriteLineAsync("# To get your ID, right click on yourself in the chat and Copy ID.");
                 await sw.WriteLineAsync("# Example: 1234567890");
                 await sw.WriteLineAsync(SettingKeys.OwnerID + ": ");
-                await sw.WriteLineAsync();
-                await sw.WriteLineAsync("# Saves all incomming messages to a file.");
-                await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync(SettingKeys.SaveMessages + ": false");
                 await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Saves all incomming console logs to a file.");
                 await sw.WriteLineAsync("# <true, false>, Default: false");

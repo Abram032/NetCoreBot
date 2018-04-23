@@ -5,6 +5,8 @@ using Discord;
 using Discord.WebSocket;
 using NetCoreBot.Repository.Concrete;
 
+//TODO: For removal biatch.
+
 namespace NetCoreBot.Common.Concrete
 {
     static class ExceptionHandler

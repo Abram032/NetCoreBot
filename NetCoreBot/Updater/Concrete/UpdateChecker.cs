@@ -5,8 +5,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Change link from dev to master.
-
 namespace NetCoreBot.Updater.Concrete
 {
     class UpdateChecker
