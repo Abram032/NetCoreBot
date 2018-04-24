@@ -5,11 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//TODO: Implement help command.
+//TODO: Implement stop command.
+//TODO: Implement restart command.
+
 namespace NetCoreBot.Commands.Concrete
 {
     public class CommandBuilder : ICommandBuilder
     {
-        public ICommand BuildCommand(string message, List<string> parameters, MessageDetails messageDetails = null)
+        public ICommand BuildCommand(string message, List<string> parameters, object messageDetails = null)
         {
             ICommand command = null;
             switch (message)

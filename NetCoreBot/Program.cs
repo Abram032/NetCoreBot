@@ -23,7 +23,10 @@ namespace NetCoreBot
     class Program
     {   
         static ICleaner cleaner = new Cleaner();
-        static IUpdateManager updateManager = new UpdateManager();
+        static IDownloader downloader = new Downloader();
+        static IUpdateChecker updateChecker = new UpdateChecker();
+        static IUpdater updater = new Updater.Concrete.Updater();
+        static IUpdateManager updateManager = new UpdateManager(updateChecker, downloader, updater);
         static ILogHandler logHandler = new LogHandler(Settings.Instance);
         static IConnectionManager connectionHandler = new ConnectionManager(Settings.Instance);
         static ICommandService commandService = new CommandService(Settings.Instance);

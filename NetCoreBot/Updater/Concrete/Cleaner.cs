@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Updater.Concrete
 {
-    class Cleaner : ICleaner
+    public class Cleaner : ICleaner
     {
         string UpdateDirPath { get; set; }
         string BackupDirPath { get; set; }

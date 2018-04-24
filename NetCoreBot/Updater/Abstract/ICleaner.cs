@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Updater.Abstract
 {
-    interface ICleaner
+    public interface ICleaner
     {
         Task CleanUp();
     }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Updater.Abstract
 {
-    public interface IUpdateManager
+    public interface IUpdateChecker
     {
-        Task MainAsync();
+        Task CheckVersion();
     }
 }

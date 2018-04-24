@@ -6,6 +6,6 @@ namespace NetCoreBot.Common.Abstract
 {
     interface IConverter
     {
-        bool StringToBool(string input);
+        bool SettingsStringToBoolean(string key);
     }
 }

@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.Text;
 using NetCoreBot.Repository.Abstract;
 
-//TODO: Remove ExceptionHandler and push method into local class.
-
 namespace NetCoreBot.Common.Concrete
 {
     class ConnectionManager : IConnectionManager
@@ -28,7 +26,7 @@ namespace NetCoreBot.Common.Concrete
             client = InitClient();
             Token = GetToken();
             client.Log += Log;
-            if(ExceptionHandler.CheckToken(client, Token))
+            if(CheckToken(client, Token))
                 await InitConnection(client);
             else
                 Console.WriteLine("Invalid Token!");
@@ -61,6 +59,20 @@ namespace NetCoreBot.Common.Concrete
             await client.LoginAsync(TokenType.Bot, Token);
             await client.StartAsync();
             await Task.CompletedTask;
+        }
+
+        private bool CheckToken(DiscordSocketClient client, string token)
+        {
+            try 
+            {
+                client.LoginAsync(TokenType.Bot, token).Wait();
+            }
+            catch
+            {          
+                return false;
+            }
+            client.LogoutAsync().Wait();
+            return true;
         }
     }
 }

@@ -5,21 +5,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Loose coupling, Implement interfaces for each classes.
-
 namespace NetCoreBot.Updater.Concrete
 {
-    class UpdateManager : IUpdateManager
+    public class UpdateManager : IUpdateManager
     {
-        UpdateChecker _updateChecker;
-        Downloader _downloader;
-        Updater _updater;
+        IUpdateChecker _updateChecker;
+        IDownloader _downloader;
+        IUpdater _updater;
 
-        public UpdateManager()
+        public UpdateManager(IUpdateChecker updateChecker, IDownloader downloader, IUpdater updater)
         {
-            _updateChecker = new UpdateChecker();
-            _downloader = new Downloader();
-            _updater = new Updater();
+            _updateChecker = updateChecker;
+            _downloader = downloader;
+            _updater = updater;
         }
 
         public async Task MainAsync()

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetCoreBot.Commands.Concrete
+namespace NetCoreBot.Common.Concrete
 {
     public class MessageDetails
     {

@@ -28,7 +28,7 @@ namespace NetCoreBot.Common.Concrete
         public async Task Handle(object log)
         {
             var _log = (LogMessage)log;
-            if (converter.StringToBool(SettingKeys.SaveLogs))
+            if (converter.SettingsStringToBoolean(SettingKeys.SaveLogs))
             {
                 if(!File.Exists(logFilePath))
                     CreateLogsDirectories();

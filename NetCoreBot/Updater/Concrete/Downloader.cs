@@ -1,4 +1,5 @@
 ﻿using NetCoreBot.Resources;
+using NetCoreBot.Updater.Abstract;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Updater.Concrete
 {
-    class Downloader
+    public class Downloader : IDownloader
     {
         private const string updateZipName = "update.zip";
         private readonly string deployPath = Environment.CurrentDirectory;

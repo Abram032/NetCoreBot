@@ -7,6 +7,6 @@ namespace NetCoreBot.Commands.Abstract
 {
     public interface ICommandBuilder
     {
-        ICommand BuildCommand(string message, List<string> parameters, MessageDetails _messageDetails = null);
+        ICommand BuildCommand(string message, List<string> parameters, object messageDetails = null);
     }
 }

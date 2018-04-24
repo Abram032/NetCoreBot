@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using NetCoreBot.Commands.Concrete;
+using NetCoreBot.Common.Abstract;
+using NetCoreBot.Common.Concrete;
+using System.Threading.Tasks;
 
 namespace NetCoreBot.Commands
 {
@@ -14,20 +17,20 @@ namespace NetCoreBot.Commands
         ISettings _settings;
 
         private List<string> _parameters;
-        private MessageDetails _messageDetails;
+        private object _messageDetails;
 
         Random random = new Random();
 
-        public GenerateRandomNumberCommand(List<string> parameters, MessageDetails messageDetails)
+        public GenerateRandomNumberCommand(List<string> parameters, object messageDetails)
         {
             _parameters = parameters;
             _messageDetails = messageDetails;
             _settings = Settings.Instance;
         }
 
-        public void Execute()
+        public async Task Execute()
         {
-            ICommandWriter _writer = new CommandWriter(_messageDetails);
+            IMessageWriter _writer = new MessageWriter(_messageDetails);
             int? rng = null;
             string error = "Invalid use of command!\n";
             if (AreValid(_parameters))
@@ -48,8 +51,7 @@ namespace NetCoreBot.Commands
             {
                 _writer.ReturnStatus(error);
             }
-            return;
-
+            await Task.CompletedTask;
         }
 
         public string Help()

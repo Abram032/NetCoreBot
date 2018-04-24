@@ -1,4 +1,5 @@
 ﻿using NetCoreBot.Resources;
+using NetCoreBot.Updater.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Updater.Concrete
 {
-    class UpdateChecker
+    public class UpdateChecker : IUpdateChecker
     {
         private string gitVersion = string.Empty; 
         private string downloadLink = string.Empty; 

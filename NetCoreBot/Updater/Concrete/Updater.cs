@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetCoreBot.Updater.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreBot.Updater.Concrete
 {
-    class Updater
+    public class Updater : IUpdater
     {
         private readonly string dirDeploy = Environment.CurrentDirectory + @"/Deploy/";
         private readonly string dirBackup = Environment.CurrentDirectory + @"/Backup/";

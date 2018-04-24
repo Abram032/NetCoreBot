@@ -48,7 +48,9 @@ namespace NetCoreBot.Common.Concrete
             if (message.Content.StartsWith(commandPrefix)
                 && message.Content.Length >= 2)
             {
-                _commandService.ExecuteCommand(message);
+                string _message = message.ToString();
+                var messageDetails = (object) new MessageDetails(message);
+                _commandService.ExecuteCommand(_message, messageDetails);
             }
             await Task.CompletedTask;
         }

@@ -1,17 +1,24 @@
 ﻿using NetCoreBot.Common.Abstract;
+using NetCoreBot.Repository.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-//TODO: Remove ExceptionHandler and move converting into local class.
 
 namespace NetCoreBot.Common.Concrete
 {
     class Converter : IConverter
     {
-        public bool StringToBool(string input)
+        public bool SettingsStringToBoolean(string key)
         {
-            return ExceptionHandler.StrToBool(input);
+            try 
+            { 
+                Convert.ToBoolean(Settings.Instance.GetValue(key)); 
+            }
+            catch 
+            { 
+                return Convert.ToBoolean(Settings.Instance.GetValue(key, true)); 
+            }
+            return Convert.ToBoolean(Settings.Instance.GetValue(key));
         }
     }
 }

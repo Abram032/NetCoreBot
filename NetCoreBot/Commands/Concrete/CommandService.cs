@@ -5,9 +5,7 @@ using NetCoreBot.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-//TODO: Move MessageDetails to commmon, should create at message recieved and passed around to MessageWriter.
-//TODO: Use Tasks and asynchronus methods. Duh.
+using System.Threading.Tasks;
 
 namespace NetCoreBot.Commands.Concrete
 {
@@ -20,43 +18,22 @@ namespace NetCoreBot.Commands.Concrete
             _settings = settings;
         }
 
-        public void ExecuteCommand(string message)
+        public async Task ExecuteCommand(string message, object messageDetails = null)
         {
-            ICommand command = CreateCommand(message);
-            command.Execute();
+            ICommand command = CreateCommand(message, messageDetails);
+            await command.Execute();
+            await Task.CompletedTask;
         }
 
-        public void ExecuteCommand(object message)
-        {
-            var socketMessage = message as SocketMessage;
-            if(socketMessage == null)
-                return;
-            ICommand command = CreateCommand(socketMessage);
-            command.Execute();
-        }
-
-        private ICommand CreateCommand(string message)
+        private ICommand CreateCommand(string message, object messageDetails)
         {
             string _message = RemovePrefix(message);
             _message = ConvertToLowercase(_message);
-            List<string> _parameters = GetParameters(_message);
+            List<string> parameters = GetParameters(_message);
             _message = GetCommand(_message);
 
-            ICommandBuilder commandFactory = new CommandBuilder();
-            ICommand command = commandFactory.BuildCommand(_message, _parameters);
-            return command;
-        }
-
-        private ICommand CreateCommand(SocketMessage socketMessage)
-        {
-            string _message = RemovePrefix(socketMessage.ToString());
-            _message = ConvertToLowercase(_message);
-            List<string> _parameters = GetParameters(_message);
-            _message = GetCommand(_message);
-            var _messageDetails = new MessageDetails(socketMessage);
-
-            ICommandBuilder commandFactory = new CommandBuilder();
-            ICommand command = commandFactory.BuildCommand(_message, _parameters, _messageDetails);
+            ICommandBuilder commandBuilder = new CommandBuilder();
+            ICommand command = commandBuilder.BuildCommand(_message, parameters, messageDetails);
             return command;
         }
 

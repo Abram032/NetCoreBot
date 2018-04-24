@@ -1,20 +1,18 @@
-﻿using NetCoreBot.Commands.Abstract;
+﻿using NetCoreBot.Common.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO: Move CommandWriter to MessageWriter in Common, spearate Commands from API.
-
-namespace NetCoreBot.Commands.Concrete
+namespace NetCoreBot.Common.Concrete
 {
-    public class CommandWriter : ICommandWriter
+    public class MessageWriter : IMessageWriter
     {
         private MessageDetails _messageDetails;
 
-        public CommandWriter(MessageDetails messageDetails)
+        public MessageWriter(object messageDetails)
         {
-            _messageDetails = messageDetails;
+            _messageDetails = messageDetails as MessageDetails;
         }
 
         public void ReturnStatus(string message, bool Cli = false)

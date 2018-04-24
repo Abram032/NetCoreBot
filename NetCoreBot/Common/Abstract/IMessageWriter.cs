@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NetCoreBot.Commands.Abstract
+namespace NetCoreBot.Common.Abstract
 {
-    public interface ICommandWriter
+    public interface IMessageWriter
     {
         void ReturnStatus(string message, bool isCli = false);
     }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NetCoreBot.Commands.Abstract
 {
-    interface ICommandService
+    public interface ICommandService
     {
-        void ExecuteCommand(string message);
-        void ExecuteCommand(object message);
+        Task ExecuteCommand(string message, object details = null);
     }
 }
