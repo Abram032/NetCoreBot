@@ -1,1 +1,1 @@
-dotnet NetCoreBot.dll
+dotnet NetCoreBot.dll %1

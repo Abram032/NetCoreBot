@@ -30,7 +30,10 @@ namespace NetCoreBot.Updater.Concrete
             }
             else if (!Info.GitVersion.Equals(Info.version))
             {
-                if (Response().Equals("y"))
+                string response = Program.arg;
+                if(response == string.Empty)
+                    response = Response();
+                if (response.Contains("y"))
                     await Update();
             }
             else

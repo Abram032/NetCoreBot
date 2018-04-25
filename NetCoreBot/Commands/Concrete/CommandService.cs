@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using NetCoreBot.Common.Abstract;
+using NetCoreBot.Common.Concrete;
 
 namespace NetCoreBot.Commands.Concrete
 {
@@ -21,7 +23,17 @@ namespace NetCoreBot.Commands.Concrete
         public async Task ExecuteCommand(string message, object messageDetails = null)
         {
             ICommand command = CreateCommand(message, messageDetails);
-            await command.Execute();
+            if(command != null)
+                await command.Execute();
+            else
+            {
+                string _message = "Unknown command.";
+                IMessageWriter writer = new MessageWriter(messageDetails);
+                if(messageDetails != null)
+                    await writer.ReturnStatus(_message);
+                else
+                    await writer.ReturnStatus(_message, true);
+            }    
             await Task.CompletedTask;
         }
 

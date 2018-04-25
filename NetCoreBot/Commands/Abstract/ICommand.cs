@@ -8,5 +8,6 @@ namespace NetCoreBot.Commands.Abstract
     public interface ICommand
     {
         Task Execute();
+        string Help();
     }
 }

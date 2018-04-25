@@ -5,10 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-//TODO: Implement help command.
-//TODO: Implement stop command.
-//TODO: Implement restart command.
-
 namespace NetCoreBot.Commands.Concrete
 {
     public class CommandBuilder : ICommandBuilder
@@ -20,6 +16,18 @@ namespace NetCoreBot.Commands.Concrete
             {
                 case CommandNames.random:
                     command = new GenerateRandomNumberCommand(parameters, messageDetails);
+                    break;
+                case CommandNames.help:
+                    command = new HelpCommand(parameters, messageDetails);
+                    break;
+                case CommandNames.restart:
+                    command = new RestartCommand(parameters, messageDetails);
+                    break;
+                case CommandNames.exit:
+                    command = new ExitCommand(parameters, messageDetails);
+                    break;
+                case CommandNames.info:
+                    command = new InfoCommand(parameters, messageDetails);
                     break;
                 default:
                     break;

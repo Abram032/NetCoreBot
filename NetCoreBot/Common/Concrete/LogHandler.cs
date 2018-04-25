@@ -14,21 +14,21 @@ namespace NetCoreBot.Common.Concrete
     class LogHandler : ILogHandler
     {
         private ISettings _settings;
-        private IConverter converter;
+        private IConverter _converter;
         private string enviroPath = Environment.CurrentDirectory;
         private string logFilePath = Environment.CurrentDirectory 
             + @"/Logs/" + DateTime.Today.ToShortDateString() + @".log";
 
-        public LogHandler(ISettings settings)
+        public LogHandler(ISettings settings, IConverter converter)
         {
             _settings = settings;
-            converter = new Converter();
+            _converter = converter;
         }
 
         public async Task Handle(object log)
         {
             var _log = (LogMessage)log;
-            if (converter.SettingsStringToBoolean(SettingKeys.SaveLogs))
+            if (_converter.SettingsStringToBoolean(SettingKeys.SaveLogs))
             {
                 if(!File.Exists(logFilePath))
                     CreateLogsDirectories();

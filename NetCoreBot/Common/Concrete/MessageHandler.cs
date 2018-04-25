@@ -50,7 +50,7 @@ namespace NetCoreBot.Common.Concrete
             {
                 string _message = message.ToString();
                 var messageDetails = (object) new MessageDetails(message);
-                _commandService.ExecuteCommand(_message, messageDetails);
+                await _commandService.ExecuteCommand(_message, messageDetails);
             }
             await Task.CompletedTask;
         }

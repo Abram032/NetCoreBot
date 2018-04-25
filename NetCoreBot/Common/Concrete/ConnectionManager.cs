@@ -30,6 +30,7 @@ namespace NetCoreBot.Common.Concrete
                 await InitConnection(client);
             else
                 Console.WriteLine("Invalid Token!");
+            await client.SetGameAsync(_settings.GetValue(SettingKeys.CommandPrefix) + " help");
             await Task.CompletedTask;
         }
 
@@ -45,7 +46,8 @@ namespace NetCoreBot.Common.Concrete
 
         private DiscordSocketClient InitClient()
         {
-            return new DiscordSocketClient(new DiscordSocketConfig { LogLevel = LogSeverity.Verbose });
+            DiscordSocketConfig discordSocketConfig = InitDiscordSocketConfig();            
+            return new DiscordSocketClient(discordSocketConfig);
         }
 
         private async Task Log(LogMessage message)
@@ -73,6 +75,26 @@ namespace NetCoreBot.Common.Concrete
             }
             client.LogoutAsync().Wait();
             return true;
+        }
+
+        private DiscordSocketConfig InitDiscordSocketConfig()
+        {
+            DiscordSocketConfig discordSocketConfig = new DiscordSocketConfig();
+            if(_settings.GetValue(SettingKeys.LogSeverity) == "Critical")
+                discordSocketConfig.LogLevel = LogSeverity.Critical;
+            else if(_settings.GetValue(SettingKeys.LogSeverity) == "Debug")
+                discordSocketConfig.LogLevel = LogSeverity.Debug;
+            else if(_settings.GetValue(SettingKeys.LogSeverity) == "Error")
+                discordSocketConfig.LogLevel = LogSeverity.Error;
+            else if(_settings.GetValue(SettingKeys.LogSeverity) == "Info")
+                discordSocketConfig.LogLevel = LogSeverity.Info;
+            else if(_settings.GetValue(SettingKeys.LogSeverity) == "Verbose")
+                discordSocketConfig.LogLevel = LogSeverity.Verbose;
+            else if(_settings.GetValue(SettingKeys.LogSeverity) == "Warning")
+                discordSocketConfig.LogLevel = LogSeverity.Warning;
+            else
+                discordSocketConfig.LogLevel = LogSeverity.Info;
+            return discordSocketConfig;
         }
     }
 }

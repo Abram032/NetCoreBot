@@ -1,4 +1,5 @@
-﻿using NetCoreBot.Commands.Concrete;
+﻿using NetCoreBot.Commands.Abstract;
+using NetCoreBot.Commands.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,11 +11,11 @@ namespace NetCoreBot
 {
     class Terminal
     {
-        CommandService _commandService;
+        ICommandService _commandService;
 
-        public Terminal()
+        public Terminal(ICommandService commandService)
         {
-            
+            _commandService = commandService;
         }
 
         public void Main()
@@ -22,8 +23,7 @@ namespace NetCoreBot
             while(true)
             {
                 string command = Console.ReadLine();
-                //_commandService = new CommandService();
-                //_commandService.ReadCommand(command);
+                _commandService.ExecuteCommand(command);
             }
         }
     }

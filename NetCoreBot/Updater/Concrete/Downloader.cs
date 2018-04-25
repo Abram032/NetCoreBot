@@ -23,8 +23,8 @@ namespace NetCoreBot.Updater.Concrete
             {
                 client.Headers.Add("Accept: text/html, application/xhtml+xml, */*");
                 client.Headers.Add("User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)");
-                //Uri download = new Uri(@"C:/Users/maiss/Desktop/Deploy.zip");
-                Uri download = new Uri(Info.DownloadLink);
+                Uri download = new Uri(@"C:/Users/maiss/Desktop/Deploy.zip");
+                //Uri download = new Uri(Info.DownloadLink);
                 await client.DownloadFileTaskAsync(download, updateZipName);
             }
             ExtractZip();

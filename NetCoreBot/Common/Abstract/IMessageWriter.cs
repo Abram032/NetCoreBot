@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NetCoreBot.Common.Abstract
 {
     public interface IMessageWriter
     {
-        void ReturnStatus(string message, bool isCli = false);
+        Task ReturnStatus(string message, bool isCli = false);
     }
 }

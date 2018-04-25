@@ -105,6 +105,7 @@ namespace NetCoreBot.Repository.Concrete
             settings.Add(SettingKeys.CommandPrefix, "!t");
             settings.Add(SettingKeys.DeleteMessages, "false");
             settings.Add(SettingKeys.DeleteCommandMessages, "false");
+            settings.Add(SettingKeys.LogSeverity, "Info");
         }
 
         private async Task CreateSettingsFile()
@@ -140,6 +141,10 @@ namespace NetCoreBot.Repository.Concrete
                 await sw.WriteLineAsync("# Deletes messages that are command calls after a while.");
                 await sw.WriteLineAsync("# <true, false>, Default: false");
                 await sw.WriteLineAsync(SettingKeys.DeleteCommandMessages + ": false");
+                await sw.WriteLineAsync();
+                await sw.WriteLineAsync("# Sets severity for console logs.");
+                await sw.WriteLineAsync("# <Critical, Debug, Error, Info, Verbose, Warning>, Default: Info");
+                await sw.WriteLineAsync(SettingKeys.LogSeverity + ": Info");
             }
             await Task.CompletedTask;
         }

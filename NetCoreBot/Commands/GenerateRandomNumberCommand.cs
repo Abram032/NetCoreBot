@@ -32,7 +32,7 @@ namespace NetCoreBot.Commands
         {
             IMessageWriter _writer = new MessageWriter(_messageDetails);
             int? rng = null;
-            string error = "Invalid use of command!\n";
+            string error = "Invalid use of command!";
             if (AreValid(_parameters))
             {
                 List<int> _intParameters = ConvertStringToInt(_parameters);
@@ -43,13 +43,13 @@ namespace NetCoreBot.Commands
                 if (_intParameters.Count == 2)
                     rng = Generate(_intParameters[0], _intParameters[1]);
                 if (rng == null)
-                    _writer.ReturnStatus(error);
+                    await _writer.ReturnStatus(error);
                 else
-                    _writer.ReturnStatus(rng.ToString());
+                    await _writer.ReturnStatus(rng.ToString());
             }
             else
             {
-                _writer.ReturnStatus(error);
+                await _writer.ReturnStatus(error);
             }
             await Task.CompletedTask;
         }
@@ -58,8 +58,8 @@ namespace NetCoreBot.Commands
         {
             string help = "Usage:\n"
                 + _settings.GetValue(SettingKeys.CommandPrefix) + " random - Generates integer number from 0 to 100.\n"
-                + _settings.GetValue(SettingKeys.CommandPrefix) + " random [max] - Generates integer number from 0 to range.\n"
-                + _settings.GetValue(SettingKeys.CommandPrefix) + " random [min] [max] - Generates integer number from start to range.\n";
+                + _settings.GetValue(SettingKeys.CommandPrefix) + " random [max] - Generates integer number from 0 to max.\n"
+                + _settings.GetValue(SettingKeys.CommandPrefix) + " random [min] [max] - Generates integer number from min to max.\n";
             return help;
         }
 
