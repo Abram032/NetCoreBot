@@ -103,8 +103,8 @@ namespace NetCoreBot.Repository.Concrete
             settings.Add(SettingKeys.OwnerID, string.Empty);
             settings.Add(SettingKeys.SaveLogs, "false");
             settings.Add(SettingKeys.CommandPrefix, "!t");
-            settings.Add(SettingKeys.DeleteMessages, "false");
-            settings.Add(SettingKeys.DeleteCommandMessages, "false");
+            //settings.Add(SettingKeys.DeleteMessages, "false");
+            //settings.Add(SettingKeys.DeleteCommandMessages, "false");
             settings.Add(SettingKeys.LogSeverity, "Info");
         }
 
@@ -134,14 +134,14 @@ namespace NetCoreBot.Repository.Concrete
                 await sw.WriteLineAsync("# Default: !t");
                 await sw.WriteLineAsync(SettingKeys.CommandPrefix + ": !t");
                 await sw.WriteLineAsync();
-                await sw.WriteLineAsync("# Deletes messages that bot sends after a while.");
-                await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync(SettingKeys.DeleteMessages + ": false");
-                await sw.WriteLineAsync();
-                await sw.WriteLineAsync("# Deletes messages that are command calls after a while.");
-                await sw.WriteLineAsync("# <true, false>, Default: false");
-                await sw.WriteLineAsync(SettingKeys.DeleteCommandMessages + ": false");
-                await sw.WriteLineAsync();
+                //await sw.WriteLineAsync("# Deletes messages that bot sends after a while.");
+                //await sw.WriteLineAsync("# <true, false>, Default: false");
+                //await sw.WriteLineAsync(SettingKeys.DeleteMessages + ": false");
+                //await sw.WriteLineAsync();
+                //await sw.WriteLineAsync("# Deletes messages that are command calls after a while.");
+                //await sw.WriteLineAsync("# <true, false>, Default: false");
+                //await sw.WriteLineAsync(SettingKeys.DeleteCommandMessages + ": false");
+                //await sw.WriteLineAsync();
                 await sw.WriteLineAsync("# Sets severity for console logs.");
                 await sw.WriteLineAsync("# <Critical, Debug, Error, Info, Verbose, Warning>, Default: Info");
                 await sw.WriteLineAsync(SettingKeys.LogSeverity + ": Info");

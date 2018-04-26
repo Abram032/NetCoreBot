@@ -15,9 +15,9 @@ namespace NetCoreBot.Common.Concrete
             _messageDetails = messageDetails as MessageDetails;
         }
 
-        public async Task ReturnStatus(string message, bool Cli = false)
+        public async Task ReturnStatus(string message)
         {
-            if(Cli)
+            if(IsCLI())
                 Console.WriteLine(message);
             else
                 SendMessageAsync(message).Wait();
@@ -28,6 +28,14 @@ namespace NetCoreBot.Common.Concrete
         {
             string _message = _messageDetails.Author.Mention + " " + message;
             await _messageDetails.Channel.SendMessageAsync(_message);
+        }
+
+        private bool IsCLI()
+        {
+            if(_messageDetails == null)
+                return true;
+            else
+                return false;
         }
     }
 }

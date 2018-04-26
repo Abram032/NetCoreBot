@@ -29,10 +29,7 @@ namespace NetCoreBot.Commands.Concrete
             {
                 string _message = "Unknown command.";
                 IMessageWriter writer = new MessageWriter(messageDetails);
-                if(messageDetails != null)
-                    await writer.ReturnStatus(_message);
-                else
-                    await writer.ReturnStatus(_message, true);
+                await writer.ReturnStatus(_message);
             }    
             await Task.CompletedTask;
         }

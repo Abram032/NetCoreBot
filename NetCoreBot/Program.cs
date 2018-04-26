@@ -9,6 +9,7 @@ using NetCoreBot.Repository.Abstract;
 using NetCoreBot.Updater.Concrete;
 using NetCoreBot.Updater.Abstract;
 
+//TODO: Implement removing messages.
 //TODO: Implement database. Should I use JSON or something else?
 //TODO: Check out CQRS pattern.
 //TODO: TESTS!

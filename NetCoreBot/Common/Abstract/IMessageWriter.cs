@@ -7,6 +7,6 @@ namespace NetCoreBot.Common.Abstract
 {
     public interface IMessageWriter
     {
-        Task ReturnStatus(string message, bool isCli = false);
+        Task ReturnStatus(string message);
     }
 }

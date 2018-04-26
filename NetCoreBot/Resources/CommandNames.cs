@@ -12,6 +12,7 @@ namespace NetCoreBot.Resources
         public const string help = "help";
         public const string info = "info";
         public const string restart = "restart";
+        public const string purge = "purge";
 
         private static List<string> InitList()
         {
@@ -21,6 +22,7 @@ namespace NetCoreBot.Resources
             commands.Add(help);
             commands.Add(restart);
             commands.Add(info);
+            commands.Add(purge);
             commands.Sort();
             return commands;
         }

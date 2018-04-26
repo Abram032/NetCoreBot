@@ -19,8 +19,6 @@ namespace NetCoreBot.Commands
         private List<string> _parameters;
         private object _messageDetails;
 
-        Random random = new Random();
-
         public HelpCommand(List<string> parameters, object messageDetails)
         {
             _parameters = parameters;

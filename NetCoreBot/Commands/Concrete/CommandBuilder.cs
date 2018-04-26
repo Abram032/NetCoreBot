@@ -29,6 +29,9 @@ namespace NetCoreBot.Commands.Concrete
                 case CommandNames.info:
                     command = new InfoCommand(parameters, messageDetails);
                     break;
+                case CommandNames.purge:
+                    command = new PurgeCommand(parameters, messageDetails);
+                    break;
                 default:
                     break;
             }
